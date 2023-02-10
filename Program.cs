@@ -11,11 +11,12 @@ namespace pogoda
     {
         static async Task Main(string[] args)
         {
+            string key = "c3c398126843eb80375dd3c0dc29408f";
             Console.Write("Введи название города: ");
             string gorod = Console.ReadLine();
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://api.openweathermap.org/data/2.5/weather?q="+gorod+"&appid=" + "c3c398126843eb80375dd3c0dc29408f" + "&lang=ru&units=metric");
-            HttpResponseMessage response2 = await client.GetAsync("https://api.openweathermap.org/data/2.5/forecast?q="+gorod+"&appid=" + "c3c398126843eb80375dd3c0dc29408f" + "&lang=ru&units=metric");
+            HttpResponseMessage response = await client.GetAsync("https://api.openweathermap.org/data/2.5/weather?q=" + gorod + "&appid=" + key + "&lang=ru&units=metric");
+            HttpResponseMessage response2 = await client.GetAsync("https://api.openweathermap.org/data/2.5/forecast?q=" + gorod + "&appid=" + key + "&lang=ru&units=metric");
             if (response.IsSuccessStatusCode && response2.IsSuccessStatusCode)
             {
                 Dictionary<string, string> dict = JsonParser(await response.Content.ReadAsStringAsync());
